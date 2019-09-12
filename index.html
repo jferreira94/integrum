@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+    <title>teste de formulário</title>
+    <link rel="stylesheet" href="style/padrao.css">
+    <script src="script/html2canvas.js"></script>
+    <script src="script/html2canvas.min.js"></script>
+    <script src="script/jspdf.min.js"></script>
+    <script src="script/fun.js"></script>
+  </head>
+  <body>
+
+ <table id="teste" width="400px">
+   <tr>
+     <th colspan="9">Atividade</th>
+     <th colspan="1">horas</th>
+   </tr>
+  </table>
+
+  <form action="" onsubmit="return submeter(this);">
+  Atividade:<br>
+  <select name="atividade">
+    <option value="invalida" selected disabled hidden>Selecione uma atividade...</option>
+    <option value="atividade a"> Atividade A</option>
+    <option value="atividade b"> Atividade B</option>
+    <option value="atividade c"> Atividade C</option>
+  </select>
+  <br>
+  Horas:<br>
+  <input type="number" name="horas" value="0" min="0">
+  <br><br>
+  <input type="submit" value="Adicionar">
+</form>
+
+<button type="button" name="Gerar" onclick="gerarPDF();">Gerar o PDF</button>
+
+  </body>
+</html>
