@@ -1,8 +1,23 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
 th{
-  background-color: aqua; 
+  background-color: aqua;
 }
 
 tr{
 	background-color: lightgray;
 	text-align: center;
+}
+
+section{
+  border: solid black 1px;
 }

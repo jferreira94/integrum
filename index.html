@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
     <title>teste de formulário</title>
     <link rel="stylesheet" href="style/padrao.css">
+    <script src="script/jquery.js"></script>
     <script src="script/html2canvas.js"></script>
     <script src="script/html2canvas.min.js"></script>
     <script src="script/jspdf.min.js"></script>
@@ -12,29 +13,145 @@
   </head>
   <body>
 
- <table id="teste" width="400px">
-   <tr>
-     <th colspan="9">Atividade</th>
-     <th colspan="1">horas</th>
-   </tr>
-  </table>
 
-  <form action="" onsubmit="return submeter(this);">
-  Atividade:<br>
-  <select name="atividade">
-    <option value="invalida" selected disabled hidden>Selecione uma atividade...</option>
-    <option value="atividade a"> Atividade A</option>
-    <option value="atividade b"> Atividade B</option>
-    <option value="atividade c"> Atividade C</option>
-  </select>
-  <br>
-  Horas:<br>
-  <input type="number" name="horas" value="0" min="0">
-  <br><br>
-  <input type="submit" value="Adicionar">
-</form>
+    <section>
+      <h1>Dados do Aluno</h1>
 
-<button type="button" name="Gerar" onclick="gerarPDF();">Gerar o PDF</button>
+      <label for="">
+        <span>Nome:</span>
+        <input type="text" name="nome" value="">
+      </label><br><br>
+
+      <label for="">
+        <span>Matrícula:</span>
+        <input type="number" name="matricula" value="" min="300000" maxlength="6">
+      </label><br><br>
+
+      <label for="">
+        <span>Turno:</span>
+        <select name="turno">
+          <option value="invalida" selected disabled hidden>Selecione seu turno...</option>
+          <option value="integral">Integral</option>
+          <option value="noturno">Noturno</option>
+        </select>
+      </label><br><br>
+
+      <label for="">
+        <span>Semestre:</span>
+        <input type="number" name="semestre-ano" value="" maxlength="4">
+        <select name="semestre">
+          <option value="pontoum">.1</option>
+          <option value="pontodois">.2</option>
+        </select>
+      </label><br><br>
+
+      <label for="">
+        <span>Grade:</span>
+        <select name="grade">
+          <option value="invalida" selected disabled hidden>Selecione a sua grade...</option>
+          <option value="integral">2013.2</option>
+          <option value="noturno">2016.1A (Noturno)</option>
+        </select>
+      </label><br><br>
+
+      <label for="">
+        <span>E-mail:</span>
+        <input type="text" name="email" value="">
+      </label><br><br>
+
+      <button type="button" name="cancelar-aluno" onclick='alert("vai fechar essa seção")'>Cancelar</button>
+      <button type="button" name="aplicar-aluno" onclick='alert("vai add as informações pro banco de dados")'>Aplicar</button>
+    </section><br>
+
+    <section>
+      <h1>Adicionar atividade</h1>
+      <form action="" onsubmit="return submeter(this);" autocomplete="off">
+        Grupo:<br>
+        <select id="form_grupo" name="grupo" onchange="mudarAtividades(this.selectedIndex)">
+          <option value="invalido" disabled selected hidden>Selecione um Grupo</option>
+          <option value="grupo1">Grupo I: Atividades de iniciação à docência, à pesquisa e/ou à extensão (96h)</option>
+          <option value="grupo2">Grupo II: Artístico-culturais e Esportivas (80h)</option>
+          <option value="grupo3">Grupo III: Atividades de participação e/ou organização de eventos (32h)</option>
+          <option value="grupo4">Grupo IV: Experiências ligadas à formação profissional e/ou correlatas (64h)</option>
+          <option value="grupo5">Grupo V: Produção Técnica e/ou Científica (96h)</option>
+          <option value="grupo6">Grupo VI: Vivências de gestão (48h)</option>
+          <option value="grupo7">Grupo VII: Outras atividades (48h)</option>
+        </select><br><br>
+
+        Atividade:<br>
+        <select id="form_atividade" name="atividade" style="display: none;">
+          <option value="invalida" disabled selected hidden>Selecione uma atividade</option>
+        </select>
+        <input type="text" id="outra_atividade" value="" style="display: none;"><br><br>
+
+        Horas:<br>
+        <input type="number" name="horas" value="0" min="0">
+        <br><br>
+        <input type="submit" value="Adicionar">
+        <button type="button" name="Gerar" onclick="gerarPDF();">Gerar o PDF</button>
+      </form>
+    </section><br>
+
+    <section id="abas">
+      <h1>Atividades Complementares</h1><br>
+
+      <p>Esse comentário vai sair daqui mais tarde. Nessa área abaixo ficam os h2 dos títulos e as listas com as atividades cadastradas, a ideia é que essa lista seja preenchida através dos dados do banco de dados.</p>
+
+      <h2>Grupo I: Atividades de iniciação à docência, à pesquisa e/ou à extensão <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo1" value="grupo1">
+        <li class="grupo1atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo II: Artístico-culturais e Esportivas <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo2" value="grupo2">
+        <li class="grupo2atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo III: Atividades de participação e/ou organização de eventos <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo3" value="grupo3">
+        <li class="grupo3atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo IV: Experiências ligadas à formação profissional e/ou correlatas <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo4" value="grupo4">
+        <li class="grupo4atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo V: Produção Técnica e/ou Científica <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo5" value="grupo5">
+        <li class="grupo5atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo VI: Vivências de gestão <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo6" value="grupo6">
+        <li class="grupo6atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
+      </ul>
+      <h2>Grupo VII: Outras atividades<span onclick='alert("abre a janela de add atividade")'>+</span></h2>
+      <ul class="grupo" id="grupo7" value="grupo7">
+        <li class="grupo7atividade">Item para teste, tem um problema para adicionar itens aqui através do formulário, mas como provavelmente tudo vai mudar com o banco de dados, não vale muito a pena resolver isso agora.</li>
+      </ul>
+    </section><br>
+
+    <section>
+      <h1>Seção de ajuda</h1><br>
+      <h2>Essa seção vai abrir em uma janela quando o usuário clicar em algum balão de dúvida.</h2>
+      <p>O conteúdo dessa seção vai ser gerado por javascript dependendo de qual botão o usuário apertar.</p>
+      <p>A ideia é que essa seção apareça como uma modal, mas por enquanto vou deixar aqui para ajudar a formatação.</p>
+      <p>As dicas sobre onde os alunos podem cumprir as atividades também apareceriam nessa seção. Mas dependendo do que a equipe decidir, pode ser criada uma seção especial só pra isso.</p>
+    </section><br>
+
+    <section>
+      <h1>Formulário Final</h1>
+      <p>Essa é uma seção que vai ficar escondida, ela serve para mostrar um modelo do formulário final e pra gerar o formulário que vai ser impresso(que o Matheus disse que era uma função inútil já que o aluno pode preencher o formulário oficial(de certa forma eu tendo a concordar com ele), mas a gente pode usar mais como um guia pro aluno saber como preencher o formulário e deixar a opção de gerar o pdf mais como um extra, já que não custa nada)</p>
+      <p>A ideia é preencher esse formulário também com base no banco de dados</p>
+      <table id="teste" width="400px">
+        <tr>
+          <th colspan="9">Atividade</th>
+          <th colspan="1">horas</th>
+        </tr>
+       </table>
+    </section><br>
+
+
+
+
+
+
 
   </body>
 </html>
