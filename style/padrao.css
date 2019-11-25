@@ -9,15 +9,67 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-th{
-  background-color: aqua;
-}
 
-tr{
-	background-color: lightgray;
-	text-align: center;
-}
 
 section{
-  border: solid black 1px;
+  border: 1px solid black;
+}
+
+.fgrupo{
+  width: 800px;
+  padding: 40px 60px 40px 100px;
+  border: 1px solid black;
+  align-items: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.fgrupo p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.cabecalho{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabecalho .ufc{
+  width: 6%;
+}
+
+.cabecalho .virtual{
+  width: 9%;
+}
+
+.cabecalho img{
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.assinatura {
+  margin: auto;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.assinatura p{
+  margin-bottom: 50px;
+}
+
+.assinatura hr{
+  border: 1px solid black;
+  display:block;
+  width: 96%;
 }

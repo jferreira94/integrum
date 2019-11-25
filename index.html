@@ -3,16 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
-    <title>teste de formulário</title>
+    <title>Integrum</title>
     <link rel="stylesheet" href="style/padrao.css">
     <script src="script/jquery.js"></script>
     <script src="script/html2canvas.js"></script>
     <script src="script/html2canvas.min.js"></script>
     <script src="script/jspdf.min.js"></script>
-    <script src="script/fun.js"></script>
   </head>
   <body>
 
+  <section id="usuario">
+    User
+  </section>
+
+  <section class="main-div">
+    <h1>Login</h1>
+    <input type="email" placeholder="digite seu e-mail" id="email_field"><br>
+    <input type="password" placeholder="digite a senha" id="password_field"><br>
+    <button onclick="login();">sub</button><br>
+  </section>
 
     <section>
       <h1>Dados do Aluno</h1>
@@ -98,57 +107,142 @@
       <p>Esse comentário vai sair daqui mais tarde. Nessa área abaixo ficam os h2 dos títulos e as listas com as atividades cadastradas, a ideia é que essa lista seja preenchida através dos dados do banco de dados.</p>
 
       <h2>Grupo I: Atividades de iniciação à docência, à pesquisa e/ou à extensão <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo1" value="grupo1">
-        <li class="grupo1atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo1" value="grupo1"></ul>
       <h2>Grupo II: Artístico-culturais e Esportivas <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo2" value="grupo2">
-        <li class="grupo2atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo2" value="grupo2"></ul>
       <h2>Grupo III: Atividades de participação e/ou organização de eventos <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo3" value="grupo3">
-        <li class="grupo3atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo3" value="grupo3"></ul>
       <h2>Grupo IV: Experiências ligadas à formação profissional e/ou correlatas <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo4" value="grupo4">
-        <li class="grupo4atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo4" value="grupo4"></ul>
       <h2>Grupo V: Produção Técnica e/ou Científica <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo5" value="grupo5">
-        <li class="grupo5atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo5" value="grupo5"></ul>
       <h2>Grupo VI: Vivências de gestão <span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo6" value="grupo6">
-        <li class="grupo6atividade">Item para teste, mas podem ser adicionados mais no formulário acima</li>
-      </ul>
+      <ul class="grupo" id="grupo6" value="grupo6"></ul>
       <h2>Grupo VII: Outras atividades<span onclick='alert("abre a janela de add atividade")'>+</span></h2>
-      <ul class="grupo" id="grupo7" value="grupo7">
-        <li class="grupo7atividade">Item para teste, tem um problema para adicionar itens aqui através do formulário, mas como provavelmente tudo vai mudar com o banco de dados, não vale muito a pena resolver isso agora.</li>
-      </ul>
+      <ul class="grupo" id="grupo7" value="grupo7"></ul>
     </section><br>
 
     <section>
       <h1>Seção de ajuda</h1><br>
-      <h2>Essa seção vai abrir em uma janela quando o usuário clicar em algum balão de dúvida.</h2>
-      <p>O conteúdo dessa seção vai ser gerado por javascript dependendo de qual botão o usuário apertar.</p>
-      <p>A ideia é que essa seção apareça como uma modal, mas por enquanto vou deixar aqui para ajudar a formatação.</p>
-      <p>As dicas sobre onde os alunos podem cumprir as atividades também apareceriam nessa seção. Mas dependendo do que a equipe decidir, pode ser criada uma seção especial só pra isso.</p>
     </section><br>
 
     <section>
       <h1>Formulário Final</h1>
-      <p>Essa é uma seção que vai ficar escondida, ela serve para mostrar um modelo do formulário final e pra gerar o formulário que vai ser impresso(que o Matheus disse que era uma função inútil já que o aluno pode preencher o formulário oficial(de certa forma eu tendo a concordar com ele), mas a gente pode usar mais como um guia pro aluno saber como preencher o formulário e deixar a opção de gerar o pdf mais como um extra, já que não custa nada)</p>
-      <p>A ideia é preencher esse formulário também com base no banco de dados</p>
-      <table id="teste" width="400px">
-        <tr>
-          <th colspan="9">Atividade</th>
-          <th colspan="1">horas</th>
-        </tr>
-       </table>
+
+
+
+      <div class="fgrupo">
+
+        <div class="cabecalho">
+          <div class="ufc">
+            <img src="ufc.png" alt="simbolo da ufc">
+          </div>
+          <span class="">
+            <u>
+              <p><b>UNIVERSIDADE FEDERAL DO CEARÁ</b></p>
+              <p><b>INSTITUTO UFC VIRTUAL</b></p>
+              <p><b>SISTEMAS E MÍDIAS DIGITAIS</b></p>
+              <p><b>ATIVIDADES COMPLEMENTARES</b></p>
+            </u>
+          </span>
+          <div class="virtual">
+            <img src="virtual.png" alt="simbolo da ufc virtual">
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <p>Nome do aluno:</p>
+        <p>Matrícula:</p>
+        <p>Turno:</p>
+        <p>E-mail:</p>
+        <p>Semestre de entrada no curso:</p>
+        <p>Grade:</p>
+        <br>
+
+        <p>III - Título do Grupo</p>
+        <table>
+          <tr>
+            <th colspan="9"><span>Atividade</span></th>
+            <th colspan="1">horas</th>
+          </tr>
+          <tr>
+            <td colspan="9">-- Atividade a ser gerada via script--</td>
+            <td colspan="1" align="center">00</td>
+          </tr>
+          <tr>
+            <td colspan="9" align="right"><b>Total</b></td>
+            <td colspan="1" align="center">00</td>
+          </tr>
+         </table>
+
+         <br>
+         <br>
+
+         <p>III - Título do Grupo</p>
+         <table>
+           <tr>
+             <th colspan="9"><span>Atividade</span></th>
+             <th colspan="1">horas</th>
+           </tr>
+           <tr>
+             <td colspan="9">-- Atividade a ser gerada via script--</td>
+             <td colspan="1" align="center">00</td>
+           </tr>
+           <tr>
+             <td colspan="9" align="right"><b>Total</b></td>
+             <td colspan="1" align="center">00</td>
+           </tr>
+          </table>
+
+          <br><br><br><br>
+
+
+          <div class="assinatura">
+
+            <p> Fortaleza, xx de xxxxx de xxxx</p>
+            <hr>
+            <p> Assinatura do aluno</p>
+
+          </div>
+
+
+      </div>
+
+
     </section><br>
 
 
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
 
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBJxBNuXiEauS-aZ4aKfaA5HDDWYNGWj3U",
+        authDomain: "integrum-7eaa8.firebaseapp.com",
+        databaseURL: "https://integrum-7eaa8.firebaseio.com",
+        projectId: "integrum-7eaa8",
+        storageBucket: "integrum-7eaa8.appspot.com",
+        messagingSenderId: "446362697550",
+        appId: "1:446362697550:web:9e680b01f48580aecbe81f"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="script/fun.js"></script>
 
 
 
