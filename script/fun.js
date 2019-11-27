@@ -36,7 +36,7 @@ function addAtividade(grupo, atividade, horas){
   grupo.innerHTML += '<li  class="' + grupo + 'atividade">' + atividade.value + ' (' + horas.value + ')</li>'
 }
 
-function gerarPDF() {
+function gerarPDF2() {
 		const filename  = 'formulario.pdf';
     var tabela = document.querySelector('#formulario');
     var larguraEmPixel = tabela.offsetWidth;
@@ -49,6 +49,16 @@ function gerarPDF() {
 		});
 	}
 
+  function gerarPDF() {
+  		const filename  = 'formulario.pdf';
+      var tabela = document.querySelector('#formulario');
+  		html2canvas(tabela).then(canvas => {
+        var myImage = canvas.toDataURL();
+        downloadURI(myImage, "cartao-virtual.png");
+  		});
+  	}
+  
+  }
 
 function escreverOpcao(value, texto){
   var resposta = '<option value=' + value + '>' + texto + '</option>'; //sem o "" no value <- lembrar pra caso de erro
