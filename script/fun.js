@@ -50,15 +50,12 @@ function gerarPDF2() {
 	}
 
   function gerarPDF() {
-  		const filename  = 'formulario.pdf';
       var tabela = document.querySelector('#formulario');
   		html2canvas(tabela).then(canvas => {
         var myImage = canvas.toDataURL();
         downloadURI(myImage, "cartao-virtual.png");
   		});
   	}
-  
-  }
 
 function escreverOpcao(value, texto){
   var resposta = '<option value=' + value + '>' + texto + '</option>'; //sem o "" no value <- lembrar pra caso de erro
