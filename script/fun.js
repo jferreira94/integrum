@@ -55,7 +55,17 @@ function gerarPDF2() {
         var myImage = canvas.toDataURL();
         downloadURI(myImage, "cartao-virtual.png");
   		});
-  	}
+  }
+
+  var downloadURI = function(uri, name) {
+      var link = document.createElement("a");
+
+      link.download = name;
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      clearDynamicLink(link);
+  }
 
 function escreverOpcao(value, texto){
   var resposta = '<option value=' + value + '>' + texto + '</option>'; //sem o "" no value <- lembrar pra caso de erro
