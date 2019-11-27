@@ -1,5 +1,3 @@
-firebase.auth().currentUser;
-
 function login(){
   var userEmail = document.getElementById("email_field").value;
   var userPass = document.getElementById("password_field").value;
@@ -40,7 +38,7 @@ function addAtividade(grupo, atividade, horas){
 
 function gerarPDF() {
 		const filename  = 'formulario.pdf';
-    var tabela = document.querySelector('#teste');
+    var tabela = document.querySelector('#formulario');
     var larguraEmPixel = tabela.offsetWidth;
     var alturaEmPixel = tabela.offsetHeight;
     var alturaEmMilimetros = (200/larguraEmPixel)*alturaEmPixel;

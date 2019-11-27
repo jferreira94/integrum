@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
     <title>Integrum</title>
     <link rel="stylesheet" href="style/padrao.css">
+    <script src="script/fun.js"></script>
     <script src="script/jquery.js"></script>
     <script src="script/html2canvas.js"></script>
     <script src="script/html2canvas.min.js"></script>
     <script src="script/jspdf.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
   </head>
   <body>
 
@@ -131,7 +134,7 @@
 
 
 
-      <div class="fgrupo">
+      <div class="fgrupo" id="formulario">
 
         <div class="cabecalho">
           <div class="ufc">
@@ -213,39 +216,16 @@
     </section><br>
 
 
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
-
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyBJxBNuXiEauS-aZ4aKfaA5HDDWYNGWj3U",
-        authDomain: "integrum-7eaa8.firebaseapp.com",
-        databaseURL: "https://integrum-7eaa8.firebaseio.com",
-        projectId: "integrum-7eaa8",
-        storageBucket: "integrum-7eaa8.appspot.com",
-        messagingSenderId: "446362697550",
-        appId: "1:446362697550:web:9e680b01f48580aecbe81f"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+
     </script>
-    <script src="script/fun.js"></script>
 
 
 
 
+
+  <script src="script/app.js"></script>
   </body>
 </html>
