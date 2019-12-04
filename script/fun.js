@@ -1,17 +1,113 @@
-function login(){
-  var userEmail = document.getElementById("email_field").value;
-  var userPass = document.getElementById("password_field").value;
+const sec = [
+  document.querySelector('#login'),
+  document.querySelector('#usuario-logado'),
+  document.querySelector('#minhas-horas'),
+  document.querySelector('#add-atividade')
+];
 
-  firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
+function carregarDados(u){
+  if(u){
 
-    window.alert("Error : " + errorMessage);
+  } else{
 
-    // ...
-  });
+  }
 }
+
+function listarAtividadesDoUsuario(u){
+    const grupos = [
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 1)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 2)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 3)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 4)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 5)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 6)],
+      [db.collection("usuarios/"+u.uid+"/atividades").where("grupo", "==", 7)]
+    ];
+    return grupos;
+}
+
+
+
+function preencherFormGrupos(array){
+  const sel = document.querySelector("#sel-grupo");
+  const sel2 = document.querySelector("#sel-grupo-horas");
+
+  sel.innerHTML = '<option value="invalida" selected disabled hidden>Selecione um grupo</option>';
+  sel2.innerHTML = '<option value="invalida" selected disabled hidden>Selecione um grupo para listar as atividades feitas</option>';
+
+  for (var i = 0; i < array.length; i++) {
+    sel.innerHTML += '<option value="'+(i+1)+'">'+array[i].descricao+'</option>';
+    sel2.innerHTML += '<option value="'+(i+1)+'">'+array[i].descricao+'</option>';
+  }
+}
+
+function preencherFormAtividades(array){
+  const sel = document.querySelector("#sel-atividade");
+
+  sel.innerHTML = '<option value="invalida" selected disabled hidden>Selecione uma atividade</option>';
+
+  for (var i = 0; i < array.length; i++) {
+    sel.innerHTML += '<option value="'+(i+1)+'">'+array[i].descricao+'</option>';
+  }
+}
+
+
+alterarTela("login");
+function alterarTela(tela){
+  switch (tela) {
+    case "login":
+      for (var i = 0; i < sec.length; i++) {
+        if (i==0) sec[i].style.display = "block";
+        else sec[i].style.display = "none";
+      }
+      break;
+    case "usuario-logado":
+      for (var i = 0; i < sec.length; i++) {
+        if (i==1) sec[i].style.display = "block";
+        else sec[i].style.display = "none";
+      }
+      break;
+    case "minhas-horas":
+      for (var i = 0; i < sec.length; i++) {
+        if (i==2) sec[i].style.display = "block";
+        else sec[i].style.display = "none";
+      }
+      break;
+    case "add-atividade":
+      for (var i = 0; i < sec.length; i++) {
+        if (i==3) sec[i].style.display = "block";
+        else sec[i].style.display = "none";
+      }
+}}
+
+function adicionarAtividade(){
+  alterarTela("add-atividade");
+}
+
+function atividadeAdicionada(){
+  const f = document.querySelector("#form-cadastro-atividade");
+  const g = document.querySelector("#sel-grupo");
+  const a = document.querySelector("#sel-atividade");
+  const h = document.querySelector("#atividade-horas");
+  let user = auth.currentUser;
+  if(user){
+    db.collection("usuarios/"+user.uid+"/atividades").add({
+      grupo: g.value,
+      atividade: a.value,
+      descricao: a.innerHTML,
+      horas: h.value
+    }).then( ()=>{
+      alterarTela("minhas-horas");
+      f.reset();
+    });
+  } else{
+    alert("favor logar para adicionar atividade");
+  }
+}
+
+
+
+
 
 
 
@@ -50,7 +146,7 @@ function gerarPDF2() {
 	}
 
   function gerarPDF() {
-      var tabela = document.querySelector('#formulario');
+      var tabela = document.querySelector('#formulario-de-atividades-complementares');
   		html2canvas(tabela).then(canvas => {
         var myImage = canvas.toDataURL();
         downloadURI(myImage, "cartao-virtual.png");
@@ -72,87 +168,8 @@ function escreverOpcao(value, texto){
     return resposta;
 }
 
-// seleção de atividades
-function mudarAtividades(index){
-  var atividades = document.getElementById("form_atividade");
-  var outra = document.getElementById("outra_atividade");
-  atividades.innerHTML = '<option value="invalida" disabled selected hidden>Selecione uma atividade</option>';
 
-  switch (index) {
-    case 1:
-      atividades.style.display = "block";
-      outra.style.display = "none";
-      atividades.innerHTML +=
-      escreverOpcao('Monitoria de Iniciação à Docência / Monitoria de Projetos', 'Monitoria de Iniciação à Docência / Monitoria de Projetos (96h)') +
-      escreverOpcao('Bolsa de Extensão', 'Bolsa de Extensão (96h)') +
-      escreverOpcao('Participação em docência no ensino fundamental e médio', 'Participação em docência no ensino fundamental e médio (64h)') +
-      escreverOpcao('Iniciação científica/PET', 'Iniciação científica/PET (96h)') +
-      escreverOpcao('Projeto social', 'Projeto social (32h)') +
-      escreverOpcao('Curso de extensão (exceto curso de línguas nas Casas de Cultura)', 'Curso de extensão (exceto curso de línguas nas Casas de Cultura) (64h)') +
-      escreverOpcao('Atividades de extensão oferecidas por outras instituições', 'Atividades de extensão oferecidas por outras instituições (32h)') +
-      escreverOpcao('Grupo de Estudo / Aprendizagem cooperativa', 'Grupo de Estudo / Aprendizagem cooperativa (32h)') +
-      escreverOpcao('Participação em Projeto de Pesquisa', 'Participação em Projeto de Pesquisa (20h)');
-      break;
-    case 2:
-      atividades.style.display = "block";
-      outra.style.display = "none";
-      atividades.innerHTML +=
-      escreverOpcao('Exposição', 'Exposição (12h)') +
-      escreverOpcao('Visita ao Museu', 'Visita ao Museu (12h)') +
-      escreverOpcao('Peça de teatro', 'Peça de teatro (12h)') +
-      escreverOpcao('Recital', 'Recital (12h)') +
-      escreverOpcao('Cine cultural', 'Cine cultural (12h)') +
-      escreverOpcao('Campeonatos Esportivos', 'Campeonatos Esportivos (4h)') +
-      escreverOpcao('Produção cultural (curtas, musicais, peças teatrais etc.)', 'Produção cultural (curtas, musicais, peças teatrais etc.) (32h)');
-      break;
-    case 3:
-        atividades.style.display = "block";
-        outra.style.display = "none";
-        atividades.innerHTML +=
-        escreverOpcao('Palestras e/ou mini-cursos específicos da área de atuação do curso - ministrados', 'Palestras e/ou mini-cursos específicos da área de atuação do curso - ministrados (32h)') +
-        escreverOpcao('Palestras e/ou mini-cursos específicos da área de atuação do curso - participação', 'Palestras e/ou mini-cursos específicos da área de atuação do curso - participação (24h)') +
-        escreverOpcao('Participações em eventos', 'Participações em eventos (20h/evento)(32h)') +
-        escreverOpcao('Organização de Palestras e Eventos', 'Organização de Palestras e Eventos (32h)');
-      break;
-    case 4:
-      atividades.style.display = "block";
-      outra.style.display = "none";
-      atividades.innerHTML +=
-      escreverOpcao('Curso de aperfeiçoamento técnico', 'Curso de aperfeiçoamento técnico (20h/curso)(40h)') +
-      escreverOpcao('Certificação específica', 'Certificação específica (40h/módulo)(64h)') +
-      escreverOpcao('Visita técnica externa', 'Visita técnica externa (12h)') +
-      escreverOpcao('Vivência profissional – área correlata ao curso', 'Vivência profissional – área correlata ao curso (64h)') +
-      escreverOpcao('Estágio supervisionado não obrigatório', 'Estágio supervisionado não obrigatório (64h)') +
-      escreverOpcao('Vivência profissional – outras áreas', 'Vivência profissional – outras áreas (4h/semestre)(20h)') +
-      escreverOpcao('Curso de língua estrangeira', 'Curso de língua estrangeira (20% da carga horária)') +
-      escreverOpcao('Disciplinas de outros cursos ou instituições de ens. superior', 'Disciplinas de outros cursos ou instituições de ens. superior (20h/disciplina)');
-      break;
-    case 5:
-      atividades.style.display = "block";
-      outra.style.display = "none";
-      atividades.innerHTML +=
-      escreverOpcao('Publicação de trabalhos científicos - completo', 'Publicação de trabalhos científicos - completo (48h/trabalho)(96h)') +
-      escreverOpcao('Publicação de trabalhos científicos – resumo', 'Publicação de trabalhos científicos – resumo (exceto E.U. da UFC) (20h/trabalho)(60h)') +
-      escreverOpcao('Monografia publicada em outro curso', 'Monografia publicada em outro curso (20h)') +
-      escreverOpcao('Projeto de desenvolvimento de produto', 'Projeto de desenvolvimento de produto (32h/projeto)(3 projetos)');
-      break;
-      case 6:
-        atividades.style.display = "block";
-        outra.style.display = "none";
-        atividades.innerHTML +=
-        escreverOpcao('Vivência de Gestão', 'Vivência de Gestão (incluindo representações) (48h)');
-        break;
-    case 7:
-      atividades.style.display = "none";
-      outra.value = "";
-      outra.style.display = "block";
-      break;
-    default:
-      atividades.style.display = "none";
-      outra.style.display = "none";
-  }
-}
-
+listarGruposForm();
 
 
 ///////////////////////////////////////////////////////////////////////
